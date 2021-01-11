@@ -23,8 +23,7 @@ requirements:
     - pip
   run: 
     - python 
-    - redis-py 
-    - numpy 
+    - matplotlib-base
     - psana
 
 test:
