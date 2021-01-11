@@ -1,0 +1,54 @@
+{% set name = 'psgeom' %}
+{% set version = '1.1.2' %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/slaclab/{{ name }}/archive/v{{ version}}.tar.gz
+  sha256: 75d7ac4ef8cab6c0be552a3faa1a5b39929ba22829eaae9a9229cb0d36850c40
+
+build:
+  skip: True  # [win or osx]
+  noarch: python
+  number: 0
+  script:
+    - "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - python
+    - setuptools
+    - pip
+  run: 
+    - python 
+    - redis-py 
+    - numpy 
+    - psana
+
+test:
+  imports:
+    - psgeom
+
+about:
+  home: https://lcls.slac.stanford.edu
+  license: BSD-3-Clause
+  license_family: BSD
+  license_file: LICENSE
+  summary: 'Software for common geometrical operations during scattering experiments'
+  description: |
+    psgeom aims to provide an easy to use code base for common
+    geometrical operations during scattering experiments
+    (load/save multiple geometry formats, translate/rotate parts
+    of a detector, easily compute reciprocal/polar space
+    coordinates, perform angular integration, etc.) User-friendliness
+    is emphasized. The software aims to be general but not sacrifice
+    simplicity.
+  doc_url: https://github.com/slaclab/psgeom/blob/master/README.md  
+  dev_url: https://github.com/slaclab/psgeom
+
+extra:
+  recipe-maintainers:
+    - valmar
+    - chrisvam
